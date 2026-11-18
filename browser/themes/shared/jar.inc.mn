@@ -252,6 +252,7 @@
   skin/classic/browser/personal-info-16.svg           (../shared/icons/personal-info-16.svg)
   skin/classic/browser/payment-methods-16.svg         (../shared/icons/payment-methods-16.svg)
   skin/classic/browser/pin-12.svg                     (../shared/icons/pin-12.svg)
+  skin/classic/browser/inert.svg                      (../shared/icons/inert.svg)
   skin/classic/browser/pin.svg                        (../shared/icons/pin.svg)
   skin/classic/browser/privateBrowsing.svg            (../shared/icons/privateBrowsing.svg)
   skin/classic/browser/reader-mode.svg                (../shared/icons/reader-mode.svg)

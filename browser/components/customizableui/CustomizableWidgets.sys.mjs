@@ -11,6 +11,7 @@ const lazy = {};
 ChromeUtils.defineESModuleGetters(lazy, {
   CustomizableUI:
     "moz-src:///browser/components/customizableui/CustomizableUI.sys.mjs",
+  InertButton: "moz-src:///browser/components/inertbutton/InertButton.sys.mjs",
   LoginHelper: "resource://gre/modules/LoginHelper.sys.mjs",
   NimbusFeatures: "resource://nimbus/ExperimentAPI.sys.mjs",
   PanelMultiView:
@@ -1145,6 +1146,16 @@ if (Services.prefs.getBoolPref("browser.mini-window.enabled", false)) {
         "MiniWindowToolbarButton",
         { mode: lazy.SELECTION_MODES.MINI_WINDOW }
       );
+    },
+  });
+}
+
+if (Services.prefs.getBoolPref("browser.inertButton.enabled", true)) {
+  CustomizableWidgets.push({
+    id: "inert-button",
+    l10nId: "toolbar-button-inert",
+    onCommand(aEvent) {
+      lazy.InertButton.activate(aEvent).catch(console.error);
     },
   });
 }

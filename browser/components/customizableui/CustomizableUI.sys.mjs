@@ -62,7 +62,7 @@ const kSubviewEvents = ["ViewShowing", "ViewHiding"];
  * The current version. We can use this to auto-add new default widgets as necessary.
  * (would be const but isn't because of testing purposes)
  */
-var kVersion = 28;
+var kVersion = 29;
 
 /**
  * Buttons removed from built-ins by version they were removed. kVersion must be
@@ -213,6 +213,13 @@ XPCOMUtils.defineLazyPreferenceGetter(
   "fireButtonEnabled",
   "browser.fireButton.enabled",
   false
+);
+
+XPCOMUtils.defineLazyPreferenceGetter(
+  lazy,
+  "inertButtonEnabled",
+  "browser.inertButton.enabled",
+  true
 );
 
 XPCOMUtils.defineLazyPreferenceGetter(
@@ -370,6 +377,7 @@ var CustomizableUIInternal = {
       "vertical-spacer",
       "urlbar-container",
       "spring",
+      lazy.inertButtonEnabled ? "inert-button" : null,
       "downloads-button",
       AppConstants.MOZ_DEV_EDITION ? "developer-button" : null,
       lazy.ippEnabled ? "ipprotection-button" : null,
@@ -1045,6 +1053,23 @@ var CustomizableUIInternal = {
       if (horizontalSnapshot.length) {
         restoreFlexibleSpace(horizontalSnapshot);
         CustomizableUIInternal.saveHorizontalTabStripState(horizontalSnapshot);
+      }
+    }
+
+    // Introduce the Inert Button to existing profiles, immediately before the
+    // downloads button, unless the user has already placed it somewhere.
+    if (currentVersion < 29 && lazy.inertButtonEnabled) {
+      let navbar = gSavedState.placements[CustomizableUI.AREA_NAVBAR];
+      let alreadyPlaced = Object.values(gSavedState.placements).some(
+        placements =>
+          Array.isArray(placements) && placements.includes("inert-button")
+      );
+      if (Array.isArray(navbar) && !alreadyPlaced) {
+        let index = navbar.indexOf("downloads-button");
+        if (index == -1) {
+          index = navbar.indexOf("urlbar-container") + 1 || navbar.length;
+        }
+        navbar.splice(index, 0, "inert-button");
       }
     }
   },

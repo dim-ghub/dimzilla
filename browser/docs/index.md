@@ -24,6 +24,7 @@ components/attribution/docs/index
 /toolkit/mozapps/defaultagent/default-browser-agent/index
 components/migration/docs/index
 components/miniwindow/docs/index
+components/inertbutton/docs/index
 components/pagedata/docs/index
 places/index
 components/asrouter/docs/index

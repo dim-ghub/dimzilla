@@ -1223,6 +1223,10 @@ toolbar-button-find =
   .label = Find
   .tooltiptext = Find in this page ({ $shortcut })
 
+toolbar-button-inert =
+  .label = Do nothing
+  .tooltiptext = This button does nothing
+
 toolbar-button-developer =
   .label = Developer
   .tooltiptext = Open Web developer tools ({ $shortcut })

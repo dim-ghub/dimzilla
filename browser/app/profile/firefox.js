@@ -3241,6 +3241,10 @@ pref("browser.urlbar.share-button.enabled", false);
 // Requires a restart to reflect state changes.
 pref("browser.toolbars.tab-groups.enabled", false);
 
+// The Inert Button. See browser/components/inertbutton/docs/index.rst.
+pref("browser.inertButton.enabled", true);
+pref("browser.inertButton.debug", false);
+
 pref("security.certerrors.felt-privacy-v1", true);
 
 #ifdef NIGHTLY_BUILD
